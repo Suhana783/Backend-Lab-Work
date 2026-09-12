@@ -1,6 +1,4 @@
 const Blog = require('../models/Blog');
-
-// Create blog (protected)
 exports.createBlog = async (req, res) => {
   try {
     const { title, content, category, tags } = req.body;
@@ -23,8 +21,6 @@ exports.createBlog = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-// Get all blogs (with search, filter, sort)
 exports.getAllBlogs = async (req, res) => {
   try {
     const { search, category, sort } = req.query;
@@ -42,8 +38,6 @@ exports.getAllBlogs = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-// Get single blog by id
 exports.getBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id).populate('author', 'name email');
@@ -54,14 +48,10 @@ exports.getBlog = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-// Update blog (protected, simple ownership check)
 exports.updateBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
     if (!blog) return res.status(404).json({ message: 'Blog not found' });
-
-    // simple ownership: only author can update
     if (blog.author.toString() !== req.user.id) {
       return res.status(403).json({ message: 'Not authorized' });
     }
@@ -79,8 +69,6 @@ exports.updateBlog = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-// Delete blog (protected, ownership)
 exports.deleteBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);

@@ -8,12 +8,8 @@ const {
   updateChallenge,
   deleteChallenge,
 } = require('../controllers/challengeController');
-
-// Public routes
 router.get('/', getAllChallenges);
 router.get('/:id', getChallenge);
-
-// Protected routes
 router.post('/', protect, createChallenge);
 router.put('/:id', protect, updateChallenge);
 router.delete('/:id', protect, deleteChallenge);

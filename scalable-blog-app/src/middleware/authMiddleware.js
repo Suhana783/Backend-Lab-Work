@@ -1,6 +1,4 @@
 const jwt = require('jsonwebtoken');
-
-// Protect routes - simple JWT auth
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {

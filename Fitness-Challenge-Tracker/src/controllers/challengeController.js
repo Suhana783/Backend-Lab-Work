@@ -1,6 +1,4 @@
 const Challenge = require('../models/Challenge');
-
-// Create a new challenge (protected)
 exports.createChallenge = async (req, res, next) => {
   try {
     const challenge = new Challenge(req.body);
@@ -10,8 +8,6 @@ exports.createChallenge = async (req, res, next) => {
     next(error);
   }
 };
-
-// Get all challenges (with simple filtering and sorting)
 exports.getAllChallenges = async (req, res, next) => {
   try {
     const { category, status, sort } = req.query;
@@ -20,8 +16,6 @@ exports.getAllChallenges = async (req, res, next) => {
     if (status) query.status = status;
 
     let challengesQuery = Challenge.find(query);
-
-    // simple sorting by duration
     if (sort === 'duration') {
       challengesQuery = challengesQuery.sort({ duration: 1 });
     }
@@ -32,8 +26,6 @@ exports.getAllChallenges = async (req, res, next) => {
     next(error);
   }
 };
-
-// Get single challenge
 exports.getChallenge = async (req, res, next) => {
   try {
     const challenge = await Challenge.findById(req.params.id);
@@ -45,8 +37,6 @@ exports.getChallenge = async (req, res, next) => {
     next(error);
   }
 };
-
-// Update challenge (protected)
 exports.updateChallenge = async (req, res, next) => {
   try {
     const challenge = await Challenge.findByIdAndUpdate(req.params.id, req.body, {
@@ -59,8 +49,6 @@ exports.updateChallenge = async (req, res, next) => {
     next(error);
   }
 };
-
-// Delete challenge (protected)
 exports.deleteChallenge = async (req, res, next) => {
   try {
     const challenge = await Challenge.findByIdAndDelete(req.params.id);

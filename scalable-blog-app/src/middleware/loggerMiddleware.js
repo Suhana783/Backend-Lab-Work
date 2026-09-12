@@ -1,4 +1,3 @@
-// Simple logger middleware
 module.exports = (req, res, next) => {
   const now = new Date();
   const time = now.toLocaleTimeString();

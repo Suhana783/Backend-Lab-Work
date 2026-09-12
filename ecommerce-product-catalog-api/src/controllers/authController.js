@@ -1,13 +1,9 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-
-// Register a new user.
 const registerUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-
-    // Check whether the email is already taken.
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -18,8 +14,6 @@ const registerUser = async (req, res, next) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Save the user with a hashed password.
     const user = await User.create({
       name,
       email,
@@ -40,13 +34,9 @@ const registerUser = async (req, res, next) => {
     next(error);
   }
 };
-
-// Login an existing user.
 const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-
-    // Find the user by email.
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -57,16 +47,12 @@ const loginUser = async (req, res, next) => {
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
-
-    // Stop login if the password does not match.
     if (!isPasswordMatch) {
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
       });
     }
-
-    // Create a JWT token for the user.
     const token = jwt.sign(
       {
         id: user._id,

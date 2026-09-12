@@ -1,4 +1,3 @@
-// Error handling middleware
 
 const errorMiddleware = (err, req, res, next) => {
   console.log('❌ Error:', err.message);

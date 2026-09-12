@@ -1,4 +1,3 @@
-// Logger middleware
 
 const loggerMiddleware = (req, res, next) => {
   const currentTime = new Date().toLocaleTimeString();

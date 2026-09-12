@@ -1,6 +1,4 @@
 const Appointment = require('../models/Appointment');
-
-// POST /api/appointments
 const createAppointment = async (req, res) => {
   try {
     const {
@@ -37,8 +35,6 @@ const createAppointment = async (req, res) => {
     });
   }
 };
-
-// GET /api/appointments
 const getAllAppointments = async (req, res) => {
   try {
     const { department, status, sort } = req.query;
@@ -72,8 +68,6 @@ const getAllAppointments = async (req, res) => {
     });
   }
 };
-
-// GET /api/appointments/:id
 const getAppointmentById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -99,8 +93,6 @@ const getAppointmentById = async (req, res) => {
     });
   }
 };
-
-// PUT /api/appointments/:id
 const updateAppointment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -132,8 +124,6 @@ const updateAppointment = async (req, res) => {
     });
   }
 };
-
-// DELETE /api/appointments/:id
 const deleteAppointment = async (req, res) => {
   try {
     const { id } = req.params;

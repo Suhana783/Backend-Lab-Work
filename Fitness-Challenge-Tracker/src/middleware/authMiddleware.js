@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-
-// Simple JWT auth middleware
 const protect = async (req, res, next) => {
   let token;
 
@@ -9,7 +7,6 @@ const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      // Attach simple user info to request
       req.user = { id: decoded.id };
       next();
     } catch (error) {

@@ -1,4 +1,3 @@
-// Any route can pass an error here by calling next(error).
 const errorMiddleware = (err, req, res, next) => {
   let statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
 

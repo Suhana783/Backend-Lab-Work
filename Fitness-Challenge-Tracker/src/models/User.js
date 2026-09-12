@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// Simple User schema for authentication
 const userSchema = new mongoose.Schema({
   name: {
     type: String,

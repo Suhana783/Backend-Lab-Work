@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-// Challenge schema - simple and beginner friendly
 const challengeSchema = new mongoose.Schema({
   challengeName: {
     type: String,

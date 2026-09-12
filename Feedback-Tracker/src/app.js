@@ -19,8 +19,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
-
-// Send unknown routes to the global error middleware.
 app.use((req, res, next) => {
 	res.status(404);
 	next(new Error(`Route not found: ${req.originalUrl}`));

@@ -1,10 +1,6 @@
 const jwt = require("jsonwebtoken");
-
-// Protect routes by checking for a valid JWT token.
 const protect = (req, res, next) => {
   const authHeader = req.headers.authorization;
-
-  // The request must include a Bearer token.
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({
       success: false,
@@ -15,7 +11,6 @@ const protect = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    // Verify the token and save the decoded data on req.user.
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
